@@ -29,10 +29,12 @@ function SignUp() {
   return (
     <>
       <Container>
+        <Top><div>Arrow</div>SignUp</Top>
         <Title>
           BookStore
         </Title>
         <Form onSubmit={signUp}>
+          <Label>Name</Label>
           <Input
             type="text"
             placeholder="Name"
@@ -40,6 +42,7 @@ function SignUp() {
             value={name}
             onChange={e => setName(e.target.value)}
           />
+          <Label>Email Address</Label>
           <Input
             type="email"
             placeholder="E-mail"
@@ -47,6 +50,7 @@ function SignUp() {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
+          <Label>Password</Label>
           <Input
             type="password"
             placeholder="Password"
@@ -54,6 +58,7 @@ function SignUp() {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <Label>Confirm your Password</Label>
           <Input
             type="password"
             placeholder="Confirm Password"
@@ -104,8 +109,6 @@ const Form = styled.form`
 const Input = styled.input`
   width: 350px;
   height: 55px;
-  left: 40px;
-  top: 325px;
   background: #E1E1E1;
   border: 1px solid rgba(0, 0, 0, 0.7);
   border-radius: 10px;
@@ -123,18 +126,14 @@ const Input = styled.input`
 
 const Button = styled.button`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   padding: 10px 140px;
+  margin-top: 80px;
   gap: 10px;
   width: 318px;
   height: 42px;
-  left: 56px;
-  top: 590px;
   background: #000000;
   border: 1px solid #545454;
   border-radius: 10px;
-  font-style: normal;
   font-weight: 400;
   font-size: 15px;
   text-align: center;
@@ -142,12 +141,32 @@ const Button = styled.button`
 `;
 
 const Text = styled.p`
-  font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
+  margin-top: 20px;
   font-size: 14px;
   a{
-    color: #fff;
+    color: #606060;
   }
+`
+const Label = styled.p`
+  width: 100%;
+  height: 22px;
+  margin-left: 35px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: #000000;
+`
+
+const Top = styled.div`
+  display: flex;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 22px;
+  color: #000000;
 `;
 
 export default SignUp

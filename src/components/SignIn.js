@@ -34,9 +34,11 @@ function SignUp() {
   return (
     <>
       <Container>
+        <Top><div>Arrow</div>Login</Top>
         <Title>
-          Login
+          Welcome Back
         </Title>
+        <Text>Happy to see you again. Please Login Here</Text>
         <Form onSubmit={signIn}>
           <Label>Email Address</Label>
           <Input
@@ -132,12 +134,12 @@ const Button = styled.button`
 
 const Text = styled.p`
   font-weight: 400;
+  margin-top: 20px;
   font-size: 14px;
   a{
-    color: #fff;
+    color: #606060;
   }
 `
-
 const Label = styled.p`
   width: 100%;
   height: 22px;
@@ -149,6 +151,14 @@ const Label = styled.p`
   line-height: 22px;
   color: #000000;
 `
-  ;
+
+const Top = styled.div`
+  display: flex;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 22px;
+  color: #000000;
+`;
 
 export default SignUp
