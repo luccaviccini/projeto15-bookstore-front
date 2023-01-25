@@ -25,7 +25,7 @@ const StyledNav = styled.nav`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 75px;
+	margin-bottom: 60px;
 
 	.icon {
 		font-size: 30px;

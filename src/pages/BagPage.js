@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BottomBar from "../components/BottomBar";
+import BottomBar from "../components/PriceBottomBar";
 import BagItem from "../components/items/BagItem";
 import TopBar from "../components/TopBar";
 
@@ -33,7 +33,20 @@ function BagPage() {
 				price={bookMock.price}
 			/>
 
-			<BottomBar />
+			<BagItem
+				title={bookMock.title}
+				author={bookMock.author}
+				image={bookMock.image}
+				price={bookMock.price}
+			/>
+			<BagItem
+				title={bookMock.title}
+				author={bookMock.author}
+				image={bookMock.image}
+				price={bookMock.price}
+			/>
+
+			<BottomBar text="Checkout now" />
 		</Page>
 	);
 }
@@ -47,6 +60,7 @@ const Page = styled.div`
 
 	width: 100vw;
 	height: 100vh;
+	margin-bottom: 240px;
 
 	display: flex;
 	flex-direction: column;
