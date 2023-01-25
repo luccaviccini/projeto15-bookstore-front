@@ -1,7 +1,13 @@
-function App(){
-  return(
-    <h1>OK</h1>
-  )
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+function App() {
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/my-bag" />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
-export default App
+export default App;
