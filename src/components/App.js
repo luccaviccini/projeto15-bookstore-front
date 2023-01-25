@@ -3,15 +3,18 @@ import { useState } from "react";
 import UserContext from './context/UserContext';
 
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 function App() {
   const [token, setToken] = useState({})
   const [userId, setUserId] = useState({})
+  const [session, setSession] = useState({})
   return (
-    <UserContext.Provider value={{ token, setToken, userId, setUserId }} >
+    <UserContext.Provider value={{ token, setToken, userId, setUserId, session, setSession }} >
       <BrowserRouter>
         <Routes>
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
