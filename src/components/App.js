@@ -1,4 +1,4 @@
-import { BagPage } from "../pages/index";
+import { BagPage, CheckoutPage } from "../pages/index";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import UserContext from "./context/UserContext";

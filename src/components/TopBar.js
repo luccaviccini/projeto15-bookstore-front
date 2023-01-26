@@ -30,6 +30,11 @@ const StyledNav = styled.nav`
 	.icon {
 		font-size: 30px;
 	}
+
+	.invisible {
+		width: 10px;
+		height: 5px;
+	}
 `;
 
 const Title = styled.h1`
