@@ -4,6 +4,7 @@ import PaymentMethodSection from "../components/payment-method/PaymentMethodSect
 import PriceBottomBar from "../components/PriceBottomBar";
 import TopBar from "../components/TopBar";
 import { useState } from "react";
+import AdressSection from "../components/adress-section/AdressSection";
 
 function CheckoutPage() {
 	const [paymentMethod, setPaymentMethod] = useState();
@@ -11,6 +12,7 @@ function CheckoutPage() {
 		<Page>
 			<TopBar title="Checkout" />
 			<SectionTitle>Shipping Adress</SectionTitle>
+			<AdressSection />
 			<SectionTitle>Payment Method</SectionTitle>
 			<PaymentMethodSection />
 			<PriceBottomBar text="Place order" />
@@ -27,7 +29,7 @@ const Page = styled.div`
 
 	width: 100vw;
 	height: 100vh;
-	margin-bottom: 240px;
+	margin-bottom: 140px;
 
 	display: flex;
 	flex-direction: column;
