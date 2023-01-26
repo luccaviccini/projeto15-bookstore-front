@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
-function PaymentMethodButton({ Icon, text, clicked }) {
+function PaymentMethodButton({ Icon, text, clicked, index, setClicked }) {
 	return (
-		<StyledButton clicked={clicked}>
+		<StyledButton clicked={clicked} onClick={changeSelected}>
 			{Icon && <Icon className="icon" />}
-			<Text>{text}</Text>
+			<Text clicked={clicked}>{text}</Text>
 		</StyledButton>
 	);
+
+	function changeSelected(e) {
+		setClicked(index);
+	}
 }
 
 export default PaymentMethodButton;
@@ -31,6 +35,11 @@ const StyledButton = styled.button`
 		clicked &&
 		`
 		background: #000000;
+		color: #fff;
+
+		.icon {
+			color: #fff;
+		}
 	`}
 
 	.icon {
@@ -47,4 +56,6 @@ const Text = styled.h3`
 	line-height: 22px;
 	text-align: center;
 	color: #000000;
+
+	${({ clicked }) => clicked && `color: #fff;`}
 `;
