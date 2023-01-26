@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-function PaymentMethodButton({ Icon, text }) {
+function PaymentMethodButton({ Icon, text, clicked }) {
 	return (
-		<StyledButton>
-			<Icon className="icon" />
+		<StyledButton clicked={clicked}>
+			{Icon && <Icon className="icon" />}
 			<Text>{text}</Text>
 		</StyledButton>
 	);
@@ -25,6 +25,13 @@ const StyledButton = styled.button`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	margin-bottom: 10px;
+
+	${({ clicked }) =>
+		clicked &&
+		`
+		background: #000000;
+	`}
 
 	.icon {
 		font-size: 24px;

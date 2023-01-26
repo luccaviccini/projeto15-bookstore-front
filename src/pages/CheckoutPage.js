@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PaymentMethodButton from "../components/payment-method/PaymentMethodButton";
+import PaymentMethodSection from "../components/payment-method/PaymentMethodSection";
 import PriceBottomBar from "../components/PriceBottomBar";
 import TopBar from "../components/TopBar";
 
@@ -10,7 +11,7 @@ function CheckoutPage() {
 			<SectionTitle>Shipping Adress</SectionTitle>
 			<SectionTitle>Payment Method</SectionTitle>
 			{/*<FontAwesomeIcon icon="fa-brands fa-pix" />*/}
-
+			<PaymentMethodSection />
 			<PriceBottomBar text="Place order" />
 		</Page>
 	);
