@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import BottomBar from "../components/PriceBottomBar";
+import BottomBar from "../components/app-bars/PriceBottomBar";
 import BagItem from "../components/items/BagItem";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/app-bars/TopBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function BagPage() {
-	const bookMock = {
-		title: "The Chronicles of Narnia",
-		author: "C.S. Lewis",
-		image: "https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg",
-		price: 48.29,
-	};
+	const bagItems = useState(null);
+
+	useEffect(() => {
+		axios.get();
+	}, []);
 
 	return (
 		<Page>

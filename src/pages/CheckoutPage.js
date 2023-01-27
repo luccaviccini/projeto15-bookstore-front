@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import PaymentMethodButton from "../components/payment-method/PaymentMethodButton";
 import PaymentMethodSection from "../components/payment-method/PaymentMethodSection";
-import PriceBottomBar from "../components/PriceBottomBar";
-import TopBar from "../components/TopBar";
+import PriceBottomBar from "../components/app-bars/PriceBottomBar";
+import TopBar from "../components/app-bars/TopBar";
 import { useState } from "react";
 import AdressSection from "../components/adress-section/AdressSection";
 
