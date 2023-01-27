@@ -2,50 +2,35 @@ import styled from "styled-components";
 import BottomBar from "../components/app-bars/PriceBottomBar";
 import BagItem from "../components/items/BagItem";
 import TopBar from "../components/app-bars/TopBar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import UserContext from "../components/context/UserContext";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function BagPage() {
-	const bagItems = useState(null);
+	const [bagItems, setBagItems] = useState(null);
+	const { token } = useContext(UserContext);
+
+	console.log(token);
 
 	useEffect(() => {
-		axios.get();
+		const request = axios.get(`${API_URL}`, {}, { headers: { token } });
+		request.then((response) => setBagItems(response.data));
 	}, []);
 
 	return (
 		<Page>
 			<TopBar title="Bag" />
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
+			{!bagItems
+				? "Loading.."
+				: bagItems.map((book) => (
+						<BagItem
+							title={book.title}
+							author={book.author}
+							image={book.image}
+							price={book.price}
+						/>
+				  ))}
 
 			<BottomBar text="Checkout now" />
 		</Page>
