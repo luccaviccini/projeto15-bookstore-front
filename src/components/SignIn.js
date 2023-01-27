@@ -24,10 +24,7 @@ function SignUp() {
       setToken(token);
       setUserId(userId)
       setSession(_id)
-      console.log("token", token)
-      console.log("userId", userId)
-      console.log("session id", _id)
-      //navigate('/home');
+      navigate('/home');
     })
     promise.catch(err => {
       console.error(err.response)
@@ -36,7 +33,7 @@ function SignUp() {
   return (
     <>
       <Page>
-        <TopBar title="Login" />
+        <TopBar title="Login" link="/sign-up" />
         <Title>
           Welcome Back
         </Title>
@@ -62,7 +59,7 @@ function SignUp() {
           />
           <Button data-test="sign-in-submit" type="submit">Login</Button>
           <Text>
-            <Link to="/sign-up">Don't have an account? Register Here</Link>
+            <StyledLink to="/sign-up">Don't have an account? Register Here</StyledLink>
           </Text>
         </Form>
       </Page>
@@ -160,13 +157,11 @@ const Label = styled.p`
   color: #000000;
 `
 
-const Top = styled.div`
-  display: flex;
-  margin-bottom: 35px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 22px;
-  color: #000000;
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
 `;
 
 export default SignUp

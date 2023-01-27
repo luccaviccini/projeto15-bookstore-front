@@ -30,7 +30,7 @@ function SignUp() {
   return (
     <>
       <Page>
-        <TopBar title="Get Started" />
+        <TopBar title="Get Started" link="/" />
         <Title>
           BookStore
         </Title>
@@ -69,7 +69,7 @@ function SignUp() {
           />
           <Button type="submit">SignUp</Button>
           <Text>
-            <Link to="/sign-in">Already have an account? Login</Link>
+            <StyledLink to="/sign-in">Already have an account? Login</StyledLink>
           </Text>
         </Form>
       </Page>
@@ -164,4 +164,13 @@ const Label = styled.p`
   line-height: 22px;
   color: #000000;
 `
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
+
 export default SignUp

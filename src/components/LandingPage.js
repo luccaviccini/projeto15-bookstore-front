@@ -1,11 +1,6 @@
-import axios from "axios"
-import { useState, useContext } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import {  Link } from "react-router-dom"
 import styled from "styled-components"
-import UserContext from "./context/UserContext"
-import TopBar from "./TopBar"
 
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
 
