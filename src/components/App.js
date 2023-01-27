@@ -4,6 +4,7 @@ import { useState } from "react";
 import UserContext from "./context/UserContext";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import LandingPage from "./LandingPage"
 
 function App() {
 	const [token, setToken] = useState({});
@@ -15,6 +16,7 @@ function App() {
 			value={{ token, setToken, userId, setUserId, session, setSession }}>
 			<BrowserRouter>
 				<Routes>
+          <Route index element={<LandingPage  />} />
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route path="/my-bag" element={<BagPage />} />
