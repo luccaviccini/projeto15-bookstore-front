@@ -1,3 +1,4 @@
 import BagPage from "./BagPage";
+import CheckoutPage from "./CheckoutPage";
 
-export { BagPage };
+export { BagPage, CheckoutPage };
