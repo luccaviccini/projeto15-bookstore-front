@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
+import TopBar from "./TopBar"
 
 function SignUp() {
   const [name, setName] = useState("")
@@ -28,8 +29,8 @@ function SignUp() {
   }
   return (
     <>
-      <Container>
-        <Top><div>Arrow</div>SignUp</Top>
+      <Page>
+        <TopBar title="Get Started" />
         <Title>
           BookStore
         </Title>
@@ -71,7 +72,7 @@ function SignUp() {
             <Link to="/sign-in">Already have an account? Login</Link>
           </Text>
         </Form>
-      </Container>
+      </Page>
     </>
   )
 }
@@ -90,13 +91,17 @@ const Title = styled.h1`
   color: #000000;
 `
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #EFEFEF;
+const Page = styled.div`
+	background-color: EFEFEF;
+	box-sizing: border-box;
+	padding: 25px 40px 0 40px;
+
+	width: 100vw;
+	height: 100vh;
+	margin-bottom: 240px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 
 const Form = styled.form`
@@ -127,7 +132,7 @@ const Input = styled.input`
 const Button = styled.button`
   display: flex;
   padding: 10px 140px;
-  margin-top: 80px;
+  margin-top: 25px;
   gap: 10px;
   width: 318px;
   height: 42px;
@@ -152,21 +157,11 @@ const Label = styled.p`
   width: 100%;
   height: 22px;
   margin-left: 35px;
-  margin-top: 30px;
+  margin-top: 18px;
   margin-bottom: 5px;
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
   color: #000000;
 `
-
-const Top = styled.div`
-  display: flex;
-  margin-bottom: 35px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 22px;
-  color: #000000;
-`;
-
 export default SignUp

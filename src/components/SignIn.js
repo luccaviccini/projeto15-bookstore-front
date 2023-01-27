@@ -3,6 +3,8 @@ import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
 import UserContext from "./context/UserContext"
+import TopBar from "./TopBar"
+
 
 function SignUp() {
   const { setToken, setUserId, setSession } = useContext(UserContext)
@@ -33,8 +35,8 @@ function SignUp() {
   }
   return (
     <>
-      <Container>
-        <Top><div>Arrow</div>Login</Top>
+      <Page>
+        <TopBar title="Login" />
         <Title>
           Welcome Back
         </Title>
@@ -63,7 +65,7 @@ function SignUp() {
             <Link to="/sign-up">Don't have an account? Register Here</Link>
           </Text>
         </Form>
-      </Container>
+      </Page>
     </>
   )
 }
@@ -82,14 +84,20 @@ const Title = styled.h1`
   color: #000000;
 `
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #EFEFEF;
+const Page = styled.div`
+	background-color: EFEFEF;
+	box-sizing: border-box;
+	padding: 25px 40px 0 40px;
+
+	width: 100vw;
+	height: 100vh;
+	margin-bottom: 240px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
+
 
 const Form = styled.form`
   display: flex;
