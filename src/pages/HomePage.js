@@ -5,7 +5,7 @@ import UserContext from "../components/context/UserContext";
 import TopBar from "../components/app-bars/TopBar";
 import { apiServices } from "../services/apiServices";
 import { useEffect } from "react";
-import { FaHome } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 
 
 
@@ -33,7 +33,11 @@ function HomePage() {
 
     return (
         <Page>
-            <TopBar title="Home" />
+            <StyledNav>
+                <Link to="/my-bag">
+                    <FaShoppingCart size={30} color="#333" />                 
+                </Link>
+            </StyledNav>
             <Books>
                 {books.map((book) => (
                     <BookContainer key={book._id} onClick={() => handleClick(book._id)}>
@@ -145,4 +149,32 @@ const Background = styled.div`
     left: 10px;
     z-index: 0;
     
+`;
+
+const StyledNav = styled.nav`
+	width: 100%;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	margin-bottom: 60px;
+
+	.icon {
+		font-size: 30px;
+	}
+
+	.invisible {
+		width: 10px;
+		height: 5px;
+	}
+`;
+
+const Title = styled.h1`
+	font-family: "Playfair Display";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 22px;
+	text-align: center;
+	letter-spacing: -0.408px;
+	color: #000000;
 `;
