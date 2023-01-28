@@ -36,11 +36,14 @@ const InfoBox = styled.div`
 `;
 
 const Image = styled.img`
-	width: 80px;
+	width: 100px;
 	height: 113px;
 	background: #d9d9d9;
 	border-radius: 20px;
 	margin-right: 20px;
+
+	overflow: hidden;
+	object-fit: cover;
 `;
 
 const Title = styled.h4`

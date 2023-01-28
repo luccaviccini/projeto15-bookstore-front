@@ -1,54 +1,52 @@
 import styled from "styled-components";
-import BottomBar from "../components/PriceBottomBar";
+import BottomBar from "../components/app-bars/PriceBottomBar";
 import BagItem from "../components/items/BagItem";
-import TopBar from "../components/TopBar";
+import TopBar from "../components/app-bars/TopBar";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import UserContext from "../components/context/UserContext";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function BagPage() {
-	const bookMock = {
-		title: "The Chronicles of Narnia",
-		author: "C.S. Lewis",
-		image: "https://upload.wikimedia.org/wikipedia/en/c/cb/The_Chronicles_of_Narnia_box_set_cover.jpg",
-		price: 48.29,
-	};
+	const [bagItems, setBagItems] = useState(null);
+	const { token } = useContext(UserContext);
+
+	console.log(token);
+
+	useEffect(() => {
+		const request = axios.get(
+			`${API_URL}/user-bag`,
+			{},
+			{ header: { token } }
+		);
+		request.then((response) => setBagItems(response.data));
+		request.catch((err) => console.log(err));
+	}, []);
+
+	const total = getTotal();
 
 	return (
 		<Page>
 			<TopBar title="Bag" />
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
+			{!bagItems
+				? "Loading.."
+				: bagItems.map((book) => (
+						<BagItem
+							title={book.title}
+							author={book.author}
+							image={book.imageURL}
+							price={book.price}
+						/>
+				  ))}
 
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-			<BagItem
-				title={bookMock.title}
-				author={bookMock.author}
-				image={bookMock.image}
-				price={bookMock.price}
-			/>
-
-			<BottomBar text="Checkout now" />
+			<BottomBar text="Checkout now" total={total} />
 		</Page>
 	);
+
+	function getTotal() {
+		const pricesArr = bagItems.map((book) => Number(book.price));
+		return pricesArr.reduce((partialSum, a) => partialSum + a, 0);
+	}
 }
 
 export default BagPage;
