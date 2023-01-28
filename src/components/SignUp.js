@@ -9,6 +9,12 @@ function SignUp() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [showError, setShowError] = useState({
+    password: "",
+    confirmPassword: "",
+    name: "",
+    email: ""
+  })
   const navigate = useNavigate();
 
   function signUp(event) {
@@ -24,7 +30,30 @@ function SignUp() {
       navigate("/sign-in")
     })
     promise.catch(err => {
-      console.error(err.response)
+      checkError(err.response.data)
+    })
+  }
+
+  function checkError(errors){
+    const controlError = {email: 0, password: 0, confirmPassword: 0, name: 0}
+    errors.forEach(error => {
+      if(error.indexOf("name") !== -1){
+        controlError.name += 1;
+      }
+      if(error.indexOf("email") !== -1){
+        controlError.email += 1;
+      }
+      if(error.indexOf("password") !== -1){
+        controlError.password += 1;
+      }
+      if(error.indexOf("confirmPassword") !== -1){
+        controlError.confirmPassword += 1;
+      }
+    });
+    setShowError({
+      name: controlError.name > 0 ? "must be a valid name" : "",
+      email: controlError.email > 0 ? "must be a valid email" : "",
+      password: controlError.email > 0 ? "must be a valid password" : "",
     })
   }
   return (
@@ -43,6 +72,7 @@ function SignUp() {
             value={name}
             onChange={e => setName(e.target.value)}
           />
+          <div>{showError.name ? <Error>{showError.name}</Error>: <></> }</div>
           <Label>Email Address</Label>
           <Input
             type="email"
@@ -51,6 +81,7 @@ function SignUp() {
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
+          <div>{showError.email ? <Error>{showError.email}</Error>: <></> }</div>
           <Label>Password</Label>
           <Input
             type="password"
@@ -59,6 +90,7 @@ function SignUp() {
             value={password}
             onChange={e => setPassword(e.target.value)}
           />
+          <div>{showError.password ? <Error>{showError.password}</Error>: <></> }</div>
           <Label>Confirm your Password</Label>
           <Input
             type="password"
@@ -67,6 +99,7 @@ function SignUp() {
             value={confirmPassword}
             onChange={e => setConfirmPassword(e.target.value)}
           />
+          <div>{showError.password ? <Error>{showError.password}</Error>: <></> }</div>
           <Button type="submit">SignUp</Button>
           <Text>
             <StyledLink to="/sign-in">Already have an account? Login</StyledLink>
@@ -172,5 +205,9 @@ const StyledLink = styled(Link)`
         text-decoration: none;
     }
 `;
+const Error = styled.p`
+  color: red;
+  font-weight: bold;
+`
 
 export default SignUp
