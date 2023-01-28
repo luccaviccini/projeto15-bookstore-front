@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 function PriceBottomBar({ total, text, link }) {
+	console.log(total);
 	return (
 		<StyledBar>
 			<TotalPrice>

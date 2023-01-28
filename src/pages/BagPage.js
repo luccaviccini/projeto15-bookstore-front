@@ -23,6 +23,8 @@ function BagPage() {
 		request.catch((err) => console.log(err));
 	}, []);
 
+	const total = getTotal();
+
 	return (
 		<Page>
 			<TopBar title="Bag" />
@@ -37,9 +39,14 @@ function BagPage() {
 						/>
 				  ))}
 
-			<BottomBar text="Checkout now" />
+			<BottomBar text="Checkout now" total={total} />
 		</Page>
 	);
+
+	function getTotal() {
+		const pricesArr = bagItems.map((book) => Number(book.price));
+		return pricesArr.reduce((partialSum, a) => partialSum + a, 0);
+	}
 }
 
 export default BagPage;
