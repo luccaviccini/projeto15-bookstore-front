@@ -35,7 +35,6 @@ function SignUp() {
   }
 
   function checkError(errors){
-    console.log("vvv", errors)
     const controlError = {email: 0, password: 0, confirmPassword: 0, name: 0}
     errors.forEach(error => {
       if(error.indexOf("name") !== -1){

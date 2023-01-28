@@ -10,6 +10,12 @@ function SignUp() {
 	const [emailValue, setEmailValue] = useState("");
 	const [passwordValue, setPasswordValue] = useState("");
 	const navigate = useNavigate();
+	const [showError, setShowError] = useState({
+    password: "",
+    confirmPassword: "",
+    name: "",
+    email: ""
+  })
 
 	function signIn(event) {
 		event.preventDefault();
@@ -25,10 +31,32 @@ function SignUp() {
 			setSession(_id);
 			navigate("/home");
 		});
-		promise.catch((err) => {
-			console.error(err.response);
-		});
+    promise.catch(err => {
+      checkError(err.response.data)
+    })
 	}
+	function checkError(errors){
+    const controlError = {email: 0, password: 0, confirmPassword: 0, name: 0}
+    errors.forEach(error => {
+      if(error.indexOf("name") !== -1){
+        controlError.name += 1;
+      }
+      if(error.indexOf("email") !== -1){
+        controlError.email += 1;
+      }
+      if(error.indexOf("password") !== -1){
+        controlError.password += 1;
+      }
+      if(error.indexOf("confirmPassword") !== -1){
+        controlError.confirmPassword += 1;
+      }
+    });
+    setShowError({
+      name: controlError.name > 0 ? "must be a valid name" : "",
+      email: controlError.email > 0 ? "must be a valid email" : "",
+      password: controlError.email > 0 ? "must be a valid password" : "",
+    })
+  }
   return (
     <>
       <Page>
@@ -47,6 +75,7 @@ function SignUp() {
             value={emailValue}
             onChange={e => setEmailValue(e.target.value)}
           />
+					<div>{showError.email ? <Error>{showError.email}</Error>: <></> }</div>
           <Label>Password</Label>
           <Input
             data-test="password"
@@ -56,6 +85,7 @@ function SignUp() {
             value={passwordValue}
             onChange={e => setPasswordValue(e.target.value)}
           />
+					<div>{showError.password ? <Error>{showError.password}</Error>: <></> }</div>
           <Button data-test="sign-in-submit" type="submit">Login</Button>
           <Text>
             <StyledLink to="/sign-up">Don't have an account? Register Here</StyledLink>
@@ -163,5 +193,8 @@ const StyledLink = styled(Link)`
         text-decoration: none;
     }
 `;
-
+const Error = styled.p`
+  color: red;
+  font-weight: bold;
+`
 export default SignUp;
