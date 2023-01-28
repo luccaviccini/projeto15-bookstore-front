@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "./context/UserContext";
+import TopBar from "./TopBar"
 
 function SignUp() {
 	const { setToken, setUserId, setSession } = useContext(UserContext);
@@ -22,15 +23,13 @@ function SignUp() {
 			setToken(token);
 			setUserId(userId);
 			setSession(_id);
-			console.log("token", token);
-			console.log("userId", userId);
-			console.log("session id", _id);
-			navigate("/my-bag");
+			navigate("/home");
 		});
 		promise.catch((err) => {
 			console.error(err.response);
 		});
 	}
+  
 	return (
 		<>
 			<Container>
@@ -70,6 +69,53 @@ function SignUp() {
 			</Container>
 		</>
 	);
+  
+    promise.then(response => {
+      const { token, userId, _id } = response.data
+      setToken(token);
+      setUserId(userId)
+      setSession(_id)
+      navigate('/home');
+    })
+    promise.catch(err => {
+      console.error(err.response)
+    })
+  }
+  return (
+    <>
+      <Page>
+        <TopBar title="Login" link="/sign-up" />
+        <Title>
+          Welcome Back
+        </Title>
+        <Text>Happy to see you again. Please Login Here</Text>
+        <Form onSubmit={signIn}>
+          <Label>Email Address</Label>
+          <Input
+            data-test="email"
+            type="email"
+            placeholder="E-mail"
+            required
+            value={emailValue}
+            onChange={e => setEmailValue(e.target.value)}
+          />
+          <Label>Password</Label>
+          <Input
+            data-test="password"
+            type="password"
+            placeholder="Password"
+            required
+            value={passwordValue}
+            onChange={e => setPasswordValue(e.target.value)}
+          />
+          <Button data-test="sign-in-submit" type="submit">Login</Button>
+          <Text>
+            <StyledLink to="/sign-up">Don't have an account? Register Here</StyledLink>
+          </Text>
+        </Form>
+      </Page>
+    </>
+  )
 }
 
 const Title = styled.h1`
@@ -86,14 +132,20 @@ const Title = styled.h1`
 	color: #000000;
 `;
 
-const Container = styled.div`
+const Page = styled.div`
+	background-color: EFEFEF;
+	box-sizing: border-box;
+	padding: 25px 40px 0 40px;
+
+	width: 100vw;
+	height: 100vh;
+	margin-bottom: 240px;
+
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
-	background-color: #efefef;
 `;
+
 
 const Form = styled.form`
 	display: flex;
@@ -156,13 +208,12 @@ const Label = styled.p`
 	color: #000000;
 `;
 
-const Top = styled.div`
-	display: flex;
-	margin-bottom: 35px;
-	font-weight: 700;
-	font-size: 24px;
-	line-height: 22px;
-	color: #000000;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
 `;
 
 export default SignUp;
