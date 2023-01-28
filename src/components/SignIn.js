@@ -3,6 +3,8 @@ import { useState, useContext } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
 import UserContext from "./context/UserContext"
+import TopBar from "./TopBar"
+
 
 function SignUp() {
   const { setToken, setUserId, setSession } = useContext(UserContext)
@@ -22,10 +24,7 @@ function SignUp() {
       setToken(token);
       setUserId(userId)
       setSession(_id)
-      console.log("token", token)
-      console.log("userId", userId)
-      console.log("session id", _id)
-      //navigate('/home');
+      navigate('/home');
     })
     promise.catch(err => {
       console.error(err.response)
@@ -33,8 +32,8 @@ function SignUp() {
   }
   return (
     <>
-      <Container>
-        <Top><div>Arrow</div>Login</Top>
+      <Page>
+        <TopBar title="Login" link="/sign-up" />
         <Title>
           Welcome Back
         </Title>
@@ -60,10 +59,10 @@ function SignUp() {
           />
           <Button data-test="sign-in-submit" type="submit">Login</Button>
           <Text>
-            <Link to="/sign-up">Don't have an account? Register Here</Link>
+            <StyledLink to="/sign-up">Don't have an account? Register Here</StyledLink>
           </Text>
         </Form>
-      </Container>
+      </Page>
     </>
   )
 }
@@ -82,14 +81,20 @@ const Title = styled.h1`
   color: #000000;
 `
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #EFEFEF;
+const Page = styled.div`
+	background-color: EFEFEF;
+	box-sizing: border-box;
+	padding: 25px 40px 0 40px;
+
+	width: 100vw;
+	height: 100vh;
+	margin-bottom: 240px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
+
 
 const Form = styled.form`
   display: flex;
@@ -152,13 +157,11 @@ const Label = styled.p`
   color: #000000;
 `
 
-const Top = styled.div`
-  display: flex;
-  margin-bottom: 35px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 22px;
-  color: #000000;
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
 `;
 
 export default SignUp
