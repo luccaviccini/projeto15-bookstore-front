@@ -29,7 +29,7 @@ function SignUp() {
 			setToken(token);
 			setUserId(userId);
 			setSession(_id);
-			navigate("/my-bag");
+			navigate("/home");
 		});
     promise.catch(err => {
       checkError(err.response.data)
