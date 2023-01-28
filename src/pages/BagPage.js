@@ -32,6 +32,7 @@ function BagPage() {
 				? "Loading.."
 				: bagItems.map((book) => (
 						<BagItem
+							key={book._id}
 							title={book.title}
 							author={book.author}
 							image={book.imageURL}
