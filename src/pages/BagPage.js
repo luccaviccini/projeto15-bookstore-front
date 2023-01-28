@@ -5,7 +5,6 @@ import TopBar from "../components/app-bars/TopBar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserContext from "../components/context/UserContext";
-const API_URL = process.env.REACT_APP_API_URL;
 
 function BagPage() {
 	const [bagItems, setBagItems] = useState(null);
@@ -15,7 +14,7 @@ function BagPage() {
 
 	useEffect(() => {
 		const request = axios.get(
-			`${API_URL}/user-bag`,
+			`${process.env.REACT_APP_API_URL}/user-bag`,
 			{},
 			{ header: { token } }
 		);
@@ -44,6 +43,7 @@ function BagPage() {
 	);
 
 	function getTotal() {
+		if (!bagItems) return 0.0;
 		const pricesArr = bagItems.map((book) => Number(book.price));
 		return pricesArr.reduce((partialSum, a) => partialSum + a, 0);
 	}
