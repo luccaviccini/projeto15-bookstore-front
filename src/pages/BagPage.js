@@ -14,8 +14,13 @@ function BagPage() {
 	console.log(token);
 
 	useEffect(() => {
-		const request = axios.get(`${API_URL}`, {}, { headers: { token } });
+		const request = axios.get(
+			`${API_URL}/user-bag`,
+			{},
+			{ header: { token } }
+		);
 		request.then((response) => setBagItems(response.data));
+		request.catch((err) => console.log(err));
 	}, []);
 
 	return (
@@ -27,7 +32,7 @@ function BagPage() {
 						<BagItem
 							title={book.title}
 							author={book.author}
-							image={book.image}
+							image={book.imageURL}
 							price={book.price}
 						/>
 				  ))}
