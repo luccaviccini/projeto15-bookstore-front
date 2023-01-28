@@ -22,7 +22,13 @@ function getBooks(token) {
     return axios.get(`${BASE_URL}/books`, config);
 }
 
+function addBookToBag(token, bookId) {
+    const config = createConfig(token);
+    return axios.post(`${BASE_URL}/user-bag/`, {bookId}, config);
+}
+
 export const apiServices = {
     getMyBag,
     getBooks,
+    addBookToBag,
 };

@@ -5,6 +5,8 @@ import UserContext from "../components/context/UserContext";
 import TopBar from "../components/app-bars/TopBar";
 import { apiServices } from "../services/apiServices";
 import { useEffect } from "react";
+import { FaHome } from 'react-icons/fa';
+
 
 
 
@@ -19,13 +21,22 @@ function HomePage() {
         request.catch((err) => console.log(err));
     }, [token]);
 
-    console.log(books)
+    // function handleClick post request to add book to bag
+    function handleClick(id) {
+        const bookId = id;
+        const request = apiServices.addBookToBag(token, bookId);
+        request.then((response) => console.log(response));
+        request.catch((err) => console.log(err));
+    }
+
+
+
     return (
         <Page>
             <TopBar title="Home" />
             <Books>
                 {books.map((book) => (
-                    <BookContainer>
+                    <BookContainer key={book._id} onClick={() => handleClick(book._id)}>
                         <Background />
                         <Book>
                             <img src={book.imageURL} alt="bookURL"></img>
@@ -37,7 +48,7 @@ function HomePage() {
                     </BookContainer>
 
                 ))}
-            </Books>
+            </Books>            
 
         </Page>
     );
