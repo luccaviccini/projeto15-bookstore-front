@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "./context/UserContext";
-import TopBar from "./TopBar"
+import TopBar from "./app-bars/TopBar"
 
 function SignUp() {
 	const { setToken, setUserId, setSession } = useContext(UserContext);
@@ -29,58 +29,6 @@ function SignUp() {
 			console.error(err.response);
 		});
 	}
-  
-	return (
-		<>
-			<Container>
-				<Top>
-					<div>Arrow</div>Login
-				</Top>
-				<Title>Welcome Back</Title>
-				<Text>Happy to see you again. Please Login Here</Text>
-				<Form onSubmit={signIn}>
-					<Label>Email Address</Label>
-					<Input
-						data-test="email"
-						type="email"
-						placeholder="E-mail"
-						required
-						value={emailValue}
-						onChange={(e) => setEmailValue(e.target.value)}
-					/>
-					<Label>Password</Label>
-					<Input
-						data-test="password"
-						type="password"
-						placeholder="Password"
-						required
-						value={passwordValue}
-						onChange={(e) => setPasswordValue(e.target.value)}
-					/>
-					<Button data-test="sign-in-submit" type="submit">
-						Login
-					</Button>
-					<Text>
-						<Link to="/sign-up">
-							Don't have an account? Register Here
-						</Link>
-					</Text>
-				</Form>
-			</Container>
-		</>
-	);
-  
-    promise.then(response => {
-      const { token, userId, _id } = response.data
-      setToken(token);
-      setUserId(userId)
-      setSession(_id)
-      navigate('/home');
-    })
-    promise.catch(err => {
-      console.error(err.response)
-    })
-  }
   return (
     <>
       <Page>

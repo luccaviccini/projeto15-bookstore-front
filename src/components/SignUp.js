@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import styled from "styled-components"
-import TopBar from "./TopBar"
+import TopBar from "./app-bars/TopBar"
 
 function SignUp() {
   const [name, setName] = useState("")
