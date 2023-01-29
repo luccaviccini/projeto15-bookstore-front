@@ -25,13 +25,27 @@ function addBookToBag(token, bookId) {
 	return axios.post(`${BASE_URL}/user-bag/`, { bookId }, config);
 }
 
+function changeAdress(token, adress) {
+	const config = createConfig(token);
+	return axios.post(`${BASE_URL}/user-adress/`, adress, config);
+}
+
 function placeOrder(token, paymentMethod) {
 	const config = createConfig(token);
-	return axios.post(`${BASE_URL}/`, paymentMethod, config);
+	console.log("ON API SERVICE", paymentMethod);
+	return axios.post(`${BASE_URL}/order`, { method: paymentMethod }, config);
+}
+
+function getUserAdress(token) {
+	const config = createConfig(token);
+	return axios.get(`${BASE_URL}/user-adress`, config);
 }
 
 export const apiServices = {
 	getMyBag,
 	getBooks,
 	addBookToBag,
+	changeAdress,
+	placeOrder,
+	getUserAdress,
 };

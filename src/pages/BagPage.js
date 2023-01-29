@@ -6,31 +6,32 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../components/context/UserContext";
 import { apiServices } from "../services/apiServices";
 import { BallTriangle as LoadingAnimation } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 function BagPage() {
 	const [bagItems, setBagItems] = useState(null);
 	const { token } = useContext(UserContext);
+	const { total, setTotal } = useContext(UserContext);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const request = apiServices.getMyBag(token);
 		request.then((response) => setBagItems(response.data));
-		console.log(bagItems);
 		request.catch((err) => console.log(err));
 	}, []);
 
-	const total = getTotal();
+	setTotal(getTotal());
 
 	if (!bagItems)
 		return (
 			<Page>
 				<TopBar title="Bag" link="/home" />
 				<LoadingAnimation
-					height={100}
-					width={100}
+					height={70}
+					width={70}
 					radius={5}
-					color="#4fa94d"
+					color="#000"
 					ariaLabel="ball-triangle-loading"
-					wrapperClass={{}}
 					wrapperStyle=""
 					visible={true}
 				/>
@@ -59,7 +60,11 @@ function BagPage() {
 					price={book.price}
 				/>
 			))}
-			<BottomBar text="Checkout now" total={total} />
+			<BottomBar
+				text="Checkout now"
+				total={total}
+				handleClick={handleClick}
+			/>
 		</Page>
 	);
 
@@ -67,6 +72,10 @@ function BagPage() {
 		if (!bagItems) return 0.0;
 		const pricesArr = bagItems.map((book) => Number(book.price));
 		return pricesArr.reduce((partialSum, a) => partialSum + a, 0);
+	}
+
+	function handleClick() {
+		navigate("/checkout");
 	}
 }
 

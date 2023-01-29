@@ -1,8 +1,18 @@
 import styled from "styled-components";
 import { GrLocation as LocationIcon } from "react-icons/gr";
+import { useContext, useEffect, useState } from "react";
+import { apiServices } from "../../services/apiServices";
+import UserContext from "../context/UserContext";
 
 function AdressSumary({ setEditAdress }) {
-	const userAdress = "";
+	const [userAdress, setUserAdress] = useState(null);
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		const promise = apiServices.getUserAdress(token);
+		promise.then((answer) => setUserAdress(answer.data));
+		promise.catch((err) => console.log(err));
+	}, []);
 
 	return (
 		<ResumeAdress onClick={changeToEdit}>
@@ -61,6 +71,11 @@ const AdressText = styled.h4`
 	text-align: center;
 	letter-spacing: -0.408px;
 	color: #000000;
+
+	width: 140px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 `;
 
 const ChooseText = styled.p`
