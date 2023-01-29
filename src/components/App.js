@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import LandingPage from "./LandingPage"
 import HomePage from "../pages/HomePage";
+import NotFound from "./NotFound";
 
 function App() {
 	const [token, setToken] = useState({});
@@ -23,6 +24,7 @@ function App() {
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/my-bag" element={<BagPage />} />
 					<Route path="/checkout" element={<CheckoutPage />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>
 		</UserContext.Provider>
