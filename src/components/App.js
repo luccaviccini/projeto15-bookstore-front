@@ -5,6 +5,7 @@ import UserContext from "./context/UserContext";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import LandingPage from "./LandingPage"
+import HomePage from "../pages/HomePage";
 
 function App() {
 	const [token, setToken] = useState({});
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<LandingPage  />} />
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/sign-in" element={<SignIn />} />
+					<Route path="/home" element={<HomePage />} />
 					<Route path="/my-bag" element={<BagPage />} />
 					<Route path="/checkout" element={<CheckoutPage />} />
 				</Routes>
