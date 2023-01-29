@@ -8,9 +8,10 @@ import AdressSection from "../components/adress-section/AdressSection";
 
 function CheckoutPage() {
 	const [paymentMethod, setPaymentMethod] = useState();
+
 	return (
 		<Page>
-			<TopBar title="Checkout" />
+			<TopBar title="Checkout" link="/my-bag" />
 			<SectionTitle>Shipping Adress</SectionTitle>
 			<AdressSection />
 			<SectionTitle>Payment Method</SectionTitle>
