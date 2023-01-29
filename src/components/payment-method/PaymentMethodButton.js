@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-function PaymentMethodButton({ Icon, text, clicked, index, setClicked }) {
+function PaymentMethodButton({
+	Icon,
+	text,
+	clicked,
+	index,
+	setClicked,
+	setPaymentMethod,
+	dbValue,
+}) {
 	return (
 		<StyledButton clicked={clicked} onClick={changeSelected}>
 			{Icon && <Icon className="icon" />}
@@ -10,6 +18,7 @@ function PaymentMethodButton({ Icon, text, clicked, index, setClicked }) {
 
 	function changeSelected(e) {
 		setClicked(index);
+		setPaymentMethod(dbValue);
 	}
 }
 

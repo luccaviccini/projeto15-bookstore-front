@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function PriceBottomBar({ total, text, link }) {
+function PriceBottomBar({ total, text, handleClick }) {
 	console.log(total);
 	return (
 		<StyledBar>
@@ -8,7 +8,7 @@ function PriceBottomBar({ total, text, link }) {
 				<p>Total: </p>
 				<p>${total || "0.00"}</p>
 			</TotalPrice>
-			<StyledButton>{text}</StyledButton>
+			<StyledButton onClick={handleClick}> {text} </StyledButton>
 		</StyledBar>
 	);
 }

@@ -1,23 +1,44 @@
 import styled from "styled-components";
-import PaymentMethodButton from "../components/payment-method/PaymentMethodButton";
 import PaymentMethodSection from "../components/payment-method/PaymentMethodSection";
 import PriceBottomBar from "../components/app-bars/PriceBottomBar";
 import TopBar from "../components/app-bars/TopBar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AdressSection from "../components/adress-section/AdressSection";
+import UserContext from "../components/context/UserContext";
+import { apiServices } from "../services/apiServices";
+import SucessPage from "./SuccessPage";
 
 function CheckoutPage() {
+	const { token, total } = useContext(UserContext);
 	const [paymentMethod, setPaymentMethod] = useState();
+	const [saleFinished, setSaleFinished] = useState(false);
+
+	if (saleFinished) return <SucessPage />;
+
 	return (
 		<Page>
-			<TopBar title="Checkout" />
+			<TopBar title="Checkout" link="/my-bag" />
 			<SectionTitle>Shipping Adress</SectionTitle>
 			<AdressSection />
 			<SectionTitle>Payment Method</SectionTitle>
-			<PaymentMethodSection />
-			<PriceBottomBar text="Place order" />
+			<PaymentMethodSection
+				paymentMethod={paymentMethod}
+				setPaymentMethod={setPaymentMethod}
+			/>
+			<PriceBottomBar
+				text="Place order"
+				handleClick={handleClick}
+				total={total}
+			/>
 		</Page>
 	);
+
+	function handleClick() {
+		console.log(paymentMethod);
+		const promise = apiServices.placeOrder(token, paymentMethod);
+		promise.then(() => setSaleFinished(true));
+		promise.catch((err) => console.log(err));
+	}
 }
 
 export default CheckoutPage;
@@ -29,7 +50,7 @@ const Page = styled.div`
 
 	width: 100vw;
 	height: 100vh;
-	margin-bottom: 140px;
+	margin-bottom: 240px;
 
 	display: flex;
 	flex-direction: column;
