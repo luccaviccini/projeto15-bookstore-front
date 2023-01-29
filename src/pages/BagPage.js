@@ -5,17 +5,11 @@ import TopBar from "../components/app-bars/TopBar";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserContext from "../components/context/UserContext";
-import {apiServices} from "../services/apiServices"
-
+import { apiServices } from "../services/apiServices";
 
 function BagPage() {
 	const [bagItems, setBagItems] = useState(null);
 	const { token } = useContext(UserContext);
-
-	console.log("O TOKEN CHEGOU???",token);
-
-	
-
 
 	useEffect(() => {
 		const request = apiServices.getMyBag(token);
@@ -27,7 +21,7 @@ function BagPage() {
 
 	return (
 		<Page>
-			<TopBar title="Bag" />
+			<TopBar title="Bag" link="/home" />
 			{!bagItems
 				? "Loading.."
 				: bagItems.map((book) => (
