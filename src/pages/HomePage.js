@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import UserContext from "../components/context/UserContext";
-import TopBar from "../components/app-bars/TopBar";
 import { apiServices } from "../services/apiServices";
 import { useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { BallTriangle as LoadingAnimation } from "react-loader-spinner";
 
 function HomePage() {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(null);
   const { token } = useContext(UserContext);
 
   useEffect(() => {
@@ -24,6 +24,29 @@ function HomePage() {
     request.then((response) => console.log(response));
     request.catch((err) => console.log(err));
   }
+
+    if (!books) {
+        return (
+            <Page>
+                <StyledNav>
+                    <Title>Home</Title>
+                    <Link to="/my-bag">
+                        <FaShoppingCart size={30} color="#333" />
+                    </Link>
+                </StyledNav>
+                <LoadingAnimation
+                    height={70}
+                    width={70}
+                    radius={5}
+                    color="#000"
+                    ariaLabel="ball-triangle-loading"
+                    wrapperStyle=""
+                    visible={true}
+                />
+            </Page>
+        );
+    }   
+
 
   return (
     <Page>
